@@ -6,10 +6,7 @@ export interface WidgetConfig {
   width: number;
 }
 export interface WidgetAttributes {
-  // TODO: type your widget's configuration and data needs
-  name1: string;
-  name2: string;
-  name3: string;
+  subReddit: string;
 }
 
 export interface WidgetData {

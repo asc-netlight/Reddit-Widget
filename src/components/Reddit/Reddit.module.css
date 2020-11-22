@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.fullpost {
+    font-size: 1.3rem;
+    font-family: "Anonymous Pro", monospace !important;
+    color: white;
+}

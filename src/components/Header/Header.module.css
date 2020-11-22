@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+    background-position-x: center;
+    background-position-y: center;
+    background-color: rgb(1, 73, 128);
+}
+
+.programmingHumor {
+    background-image: url("https://styles.redditmedia.com/t5_2tex6/styles/bannerBackgroundImage_z6ejudtdz7p41.png?width=4000&s=9e33bf27ecab480bc284b0d439ba9565668e2131");
+}
+
+.programmingHorror {
+    background-color: rgb(51, 168, 255);
+}

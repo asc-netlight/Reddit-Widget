@@ -1,12 +1,20 @@
-import DemoComponent from "components/DemoComponent/DemoComponent";
 import { GetStaticProps, NextPage } from "next";
+
+import Reddit from "../components/Reddit";
+import RedditContext, { useRedditContext } from "../context/redditContext";
 
 type Props = {
   buildTime: number;
 };
 
 const IndexPage: NextPage<Props> = ({ buildTime }) => {
-  return <DemoComponent buildTime={buildTime} />;
+  const contextValue = useRedditContext();
+
+  return (
+    <RedditContext.Provider value={contextValue}>
+      <Reddit />
+    </RedditContext.Provider>
+  );
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
