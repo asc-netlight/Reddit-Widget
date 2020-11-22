@@ -1,11 +1,6 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useState,
-} from "react";
-import {  validPictureExtensions } from "../utils/data";
+import { createContext, Dispatch, SetStateAction, useCallback, useState } from "react";
+
+import { validPictureExtensions } from "../utils/data";
 
 export type RedditContextType = {
   link: string;
@@ -25,7 +20,7 @@ export const useRedditContext = (): RedditContextType => {
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
   const [subReddit, setSubReddit] = useState(null);
-  const [subReddits, setSubReddits] = useState(null)
+  const [subReddits, setSubReddits] = useState(null);
   const maxTitleLenght = 150;
   const maxEdgeRatio = 2.5;
   let redditData;
@@ -49,20 +44,16 @@ export const useRedditContext = (): RedditContextType => {
     }
 
     let title: string = redditData.data.children[index].data.title;
-    if (title.length > maxTitleLenght)
-      title = title.slice(0, maxTitleLenght) + "..";
+    if (title.length > maxTitleLenght) title = title.slice(0, maxTitleLenght) + "..";
 
     setTitle(title);
     setLink(link);
 
-    let image = new Image();
+    const image = new Image();
     image.src = link;
 
     image.onload = () => {
-      if (
-        image.width / image.height > maxEdgeRatio ||
-        image.height / image.width > maxEdgeRatio
-      ) {
+      if (image.width / image.height > maxEdgeRatio || image.height / image.width > maxEdgeRatio) {
         getPicture();
         return;
       }
@@ -71,8 +62,8 @@ export const useRedditContext = (): RedditContextType => {
 
   const loadRedditPost = useCallback(async () => {
     await fetch(`https://www.reddit.com/r/${subReddit}/top/.json?t=week`)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         redditData = data;
       });
     getPicture();
