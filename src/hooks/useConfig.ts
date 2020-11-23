@@ -21,7 +21,10 @@ export const useConfig = (): Params => {
       window.addEventListener(
         "message",
         event => {
-          if (event.origin !== process.env.NEXT_PUBLIC_DASHBOARD_ORIGIN) return;
+          if (event.origin !== process.env.NEXT_PUBLIC_DASHBOARD_ORIGIN) {
+            logger("Not on NEXT PUBLIC DASH, but on: " + event.origin);
+            return;
+          }
 
           const data = event.data as WidgetConfig;
           logger("DATA CONF", typeof data.conf, data.conf);
@@ -34,6 +37,8 @@ export const useConfig = (): Params => {
       );
 
       window.parent.postMessage(process.env.NEXT_PUBLIC_WIDGET_ID, "*");
+    } else {
+      logger("No data sat");
     }
   }, []);
 

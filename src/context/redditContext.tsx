@@ -19,7 +19,7 @@ const RedditContext = createContext<RedditContextType>(null);
 export const useRedditContext = (): RedditContextType => {
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
-  const [subReddit, setSubReddit] = useState(null);
+  const [subReddit, setSubReddit] = useState();
   const [subReddits, setSubReddits] = useState(null);
   const maxTitleLenght = 150;
   const maxEdgeRatio = 2.5;

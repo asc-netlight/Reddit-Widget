@@ -1,5 +1,6 @@
 import { useConfig } from "hooks/useConfig";
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import { useLogger } from "hooks/useLogger";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 
 import RedditContext from "../../context/redditContext";
 import Header from "../Header";
@@ -10,10 +11,13 @@ type Props = {};
 
 const Reddit: FunctionComponent = ({}) => {
   const { subReddit, setSubReddit, loadRedditPost } = useContext(RedditContext);
+  const { logger } = useLogger("RedditComponent")
   const { config } = useConfig();
 
   useEffect(() => {
     config.conf ? setSubReddit(config.conf.subReddit) : setSubReddit("");
+    logger("Config.conf: " + config.conf)
+    
   }, [config]);
 
   useEffect(() => {
