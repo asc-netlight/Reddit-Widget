@@ -3,8 +3,6 @@ import { FunctionComponent, useCallback, useContext } from "react";
 import RedditContext from "../../context/redditContext";
 import styles from "./Header.module.css";
 
-type Props = {};
-
 const Header: FunctionComponent = () => {
   const { subReddit } = useContext(RedditContext);
 
@@ -19,7 +17,7 @@ const Header: FunctionComponent = () => {
 
   return (
     <div className={`${styles.header} ${getStyling()}`}>
-      <p>{`Today's Top Posts @ /r/${subReddit}`}</p>
+      <p>{`Today's Top Posts @ ${subReddit}`}</p>
     </div>
   );
 };
