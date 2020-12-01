@@ -11,13 +11,12 @@ type Props = {};
 
 const Reddit: FunctionComponent = ({}) => {
   const { subReddit, setSubReddit, loadRedditPost } = useContext(RedditContext);
-  const { logger } = useLogger("RedditComponent")
+  const { logger } = useLogger("RedditComponent");
   const { config } = useConfig();
 
   useEffect(() => {
     config.conf ? setSubReddit(config.conf.subReddit) : setSubReddit("");
-    logger("Config.conf: " + config.conf)
-    
+    logger("Config.conf: " + config.conf);
   }, [config]);
 
   useEffect(() => {

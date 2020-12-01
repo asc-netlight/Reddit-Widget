@@ -1,7 +1,6 @@
 import { FunctionComponent, useCallback, useContext } from "react";
 
 import RedditContext from "../../context/redditContext";
-import { validSubReddits } from "../../utils/data";
 import styles from "./Post.module.css";
 
 type Props = {};
@@ -11,9 +10,9 @@ const Post: FunctionComponent = () => {
 
   const getStyling = useCallback((): string => {
     switch (subReddit) {
-      case "programminghumor":
+      case "ProgrammerHumor":
         return styles.programmingHumor;
-      case "programminhorror":
+      case "programminghorror":
         return styles.programmingHorror;
     }
   }, []);

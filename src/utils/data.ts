@@ -1,5 +1,5 @@
 export enum validSubReddits {
-  PROGRAMMING_HUMOR = "programminghumor",
+  PROGRAMMER_HUMOR = "ProgrammerHumor",
   PROGRAMMING_HORROR = "programminghorror"
   //PROGRAMMING = "programming",
 }
