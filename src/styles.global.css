@@ -7,7 +7,7 @@ body {
   margin: 0;
   font-family: var(--font-monospace);
 
-  background: var(--color-white-alt);
+  background: var(--color-black);
   color: var(--color-purple);
 
   overflow: hidden;

@@ -13,7 +13,7 @@ const Reddit: FunctionComponent = () => {
   const { config } = useConfig();
 
   useEffect(() => {
-    config.conf ? setSubReddit(config.conf.subReddit) : setSubReddit("");
+    config.conf ? setSubReddit(config.conf.subReddit) : setSubReddit("/r/softwaregore");
     logger("Config.conf: " + config.conf);
   }, [config]);
 

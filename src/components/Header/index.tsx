@@ -8,9 +8,9 @@ const Header: FunctionComponent = () => {
 
   const getStyling = useCallback((): string => {
     switch (subReddit) {
-      case "ProgrammerHumor":
+      case "/r/ProgrammerHumor":
         return styles.programmingHumor;
-      case "programminhorror":
+      case "/r/programminhorror":
         return styles.programmingHorror;
     }
   }, []);
