@@ -1,3 +1,4 @@
+import { useLogger } from "hooks/useLogger";
 import { createContext, Dispatch, SetStateAction, useCallback, useState } from "react";
 
 import { validPictureExtensions } from "../utils/data";
@@ -19,10 +20,12 @@ const RedditContext = createContext<RedditContextType>(null);
 export const useRedditContext = (): RedditContextType => {
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
-  const [subReddit, setSubReddit] = useState();
+  const [subReddit, setSubReddit] = useState("");
   const [subReddits, setSubReddits] = useState(null);
   const maxTitleLenght = 150;
   const maxEdgeRatio = 2.5;
+  const { logger } = useLogger("useRedditContext");
+
   let redditData;
 
   const getFileExt = (link: string) => {
@@ -37,6 +40,7 @@ export const useRedditContext = (): RedditContextType => {
     let index;
     let link;
 
+    logger(redditData);
     while (!isPicture) {
       index = Math.floor(Math.random() * len);
       link = redditData.data.children[index].data.url;
@@ -61,7 +65,7 @@ export const useRedditContext = (): RedditContextType => {
   };
 
   const loadRedditPost = useCallback(async () => {
-    await fetch(`https://www.reddit.com/r/${subReddit}/top/.json?t=week`)
+    await fetch(`https://www.reddit.com${subReddit}/top/.json?t=week`)
       .then(res => res.json())
       .then(data => {
         redditData = data;

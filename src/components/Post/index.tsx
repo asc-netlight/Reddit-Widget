@@ -3,8 +3,6 @@ import { FunctionComponent, useCallback, useContext } from "react";
 import RedditContext from "../../context/redditContext";
 import styles from "./Post.module.css";
 
-type Props = {};
-
 const Post: FunctionComponent = () => {
   const { subReddit, link, title } = useContext(RedditContext);
 

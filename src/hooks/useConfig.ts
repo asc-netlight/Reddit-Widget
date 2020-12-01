@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { WidgetConfig } from "types/Widget";
 
 import { useLogger } from "./useLogger";
 
 // local type don't export. Move to ../types if export is needed
-
 type Params = {
   config: WidgetConfig;
+  id: string; //this is the id of a specific instance of this widget. Used to fetch data
+  hasLoadedConfig: boolean;
 };
 
 /**
@@ -15,16 +16,30 @@ type Params = {
 export const useConfig = (): Params => {
   const { logger } = useLogger("useData");
   const [config, setData] = useState<WidgetConfig>({} as any);
+  const [id, setId] = useState("");
+
+  const hasLoadedConfig = useMemo(() => id !== "" && !!config["client-id"], [id, config]);
 
   useEffect(() => {
     if (process.browser) {
+      setId(window.name);
+    }
+  }, []);
+
+  /**
+   * Data fetching via message event loop.
+   *
+   * This effect attached a message event listener only for the allowed origin.
+   * Asserting that the data is the configuration of this specific widget.
+   *
+   * To receive this data, this widget will send a message to the parent window with its given ID.
+   */
+  useEffect(() => {
+    if (id !== "" && window.parent) {
       window.addEventListener(
         "message",
         event => {
-          if (event.origin !== process.env.NEXT_PUBLIC_DASHBOARD_ORIGIN) {
-            logger("Not on NEXT PUBLIC DASH, but on: " + event.origin);
-            return;
-          }
+          if (event.origin !== process.env.NEXT_PUBLIC_DASHBOARD_ORIGIN) return;
 
           const data = event.data as WidgetConfig;
           logger("DATA CONF", typeof data.conf, data.conf);
@@ -36,13 +51,13 @@ export const useConfig = (): Params => {
         false
       );
 
-      window.parent.postMessage(process.env.NEXT_PUBLIC_WIDGET_ID, "*");
-    } else {
-      logger("No data sat");
+      window.parent.postMessage(id, "*");
     }
-  }, []);
+  }, [id]);
 
   return {
-    config
+    config,
+    id,
+    hasLoadedConfig
   };
 };
